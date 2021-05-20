@@ -1,0 +1,30 @@
+.contenido {
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+
+@media only screen and (min-width:641px) {
+    .contenido {
+        max-width: 50%;
+    }   
+}
+
+@media only screen and (min-width:999px) {
+    .contenido {
+        max-width: 40%;
+    }   
+}
+
+.opcion {
+    margin-top: 2rem;
+}
+
+.opcion h3 {
+    margin-bottom: 1rem;
+}
+
+.opcion button {
+    width: 100%;
+}

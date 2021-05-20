@@ -1,0 +1,29 @@
+#topbar {
+    color: white;
+    background-color: var(--blue-hover);
+    padding: 1.6rem;
+}
+
+.contenido-toolbar {
+    text-align: center;
+    position: relative;
+}
+
+.right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+}
+
+.capturar-buttons {
+    display: none;
+}
+
+.capturar-buttons > * {
+    margin-left: 8px;
+}
+
+h2.logo {
+    font-family: 700;
+}

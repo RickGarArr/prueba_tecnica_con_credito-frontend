@@ -1,0 +1,137 @@
+.form-seccion-title {
+    margin: 1rem;
+}
+
+@media only screen and (min-width:641px) {
+    .formulario-registro {
+        max-width: 840px;
+        margin: 0 auto;
+    }
+    .nombre-apellidos {
+        display: flex;
+        justify-content: space-between;
+    }
+    .nombre-apellidos>* {
+        flex: 0 0 calc(27% - 4px);
+    }
+    .nombre-apellidos> :first-child {
+        flex: 0 0 calc(46% - 4px);
+    }
+    .domicilio {
+        display: flex;
+        justify-content: space-between;
+    }
+    .domicilio>* {
+        flex: 0 0 calc(20% - 4px);
+    }
+    .domicilio> :first-child {
+        flex: 0 0 calc(40% - 4px);
+    }
+    .contacto {
+        display: flex;
+        justify-content: space-between;
+    }
+    .contacto>* {
+        flex: 0 0 calc(50% - 4px);
+    }
+}
+
+/* ------------------------------------------------------------------------------------------ // documentos // */
+
+.form-seccion-title.documentos {
+    position: relative;
+}
+
+.agregar-mas {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    /* padding: .6rem 1rem; */
+    transform: translateY(-50%);
+}
+
+/* .agregar-mas {
+    width: 16rem;
+    transform: translateY(-50%);
+    color: transparent;
+    border: none;
+}
+
+.agregar-mas:focus {
+    outline: none;
+}
+
+.agregar-mas::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.agregar-mas::before {
+    content: 'Seleccionar un archivo';
+    color: white;
+    position: absolute;
+    right: 0;
+    display: inline-block;
+    background-color: var(--blue);
+    border: none;
+    padding: .6rem 1rem;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.agregar-mas:hover::before {
+    background-color: red;
+}
+
+.agregar-mas:hover::before {
+    border-color: black;
+}
+
+.agregar-mas:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+} */
+
+/* ------------------------------------------------------------------------------------------ // file-list // */ 
+.file-list-header,
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .6rem 1rem;
+}
+
+.file-name {
+    flex: 0 0 calc(38% - 4px);
+}
+
+.file {
+    flex: 0 0 calc(38% - 4px);
+}
+
+.options {
+    flex: 0 0 calc(20% - 4px);
+}
+
+h4.file-name,
+h4.file,
+h4.options {
+    text-align: center;
+}
+
+.options .buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.options .buttons > * {
+    flex: 0 0 calc(50% - 4px);
+    width: 100%;
+}
+
+
+input.ng-invalid.ng-dirty {
+    border-color: var(--red);
+}

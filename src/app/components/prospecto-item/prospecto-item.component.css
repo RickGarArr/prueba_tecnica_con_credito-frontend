@@ -1,0 +1,25 @@
+.prospectos-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+    background-color: white;
+    border-radius: 5px;
+    padding: 4px 4px;
+}
+
+.prospectos-list-item > * {
+    text-align: center;
+}
+
+.prospectos-list-item.autorizado {
+    background-color: #d4ffb7;
+}
+
+.prospectos-list-item.rechazado {
+    background-color: #ffb3b3;
+}
+
+.prospectos-list-item.enviado {
+    background-color: #a9d6ff;
+}

@@ -1,0 +1,64 @@
+<form [formGroup]="capturarForm" class="formulario-registro">
+
+    <h3 class="form-seccion-title">Datos generales</h3>
+
+    <div class="nombre-apellidos">
+
+        <app-form-control labelText="nombre" inputId="nombre" inputType="text" inputName="nombre"
+            placeholder="Nombre del prospecto" [control]="capturarForm.get('nombre')"></app-form-control>
+
+        <app-form-control labelText="apellido paterno" inputId="apellido_paterno" inputType="text"
+            inputName="apellido_paterno" placeholder="Apellido Paterno"
+            [control]="capturarForm.get('apellido_pat')"></app-form-control>
+
+        <app-form-control labelText="apellido materno" inputId="apellido_materno" inputType="text"
+            inputName="apellido_materno" placeholder="Apellido Materno"
+            [control]="capturarForm.get('apellido_mat')"></app-form-control>
+    </div>
+
+    <div class="domicilio">
+
+        <app-form-control labelText="calle" inputId="calle" inputType="text" inputName="calle"
+            placeholder="Calle" [control]="capturarForm.get('calle')"></app-form-control>
+
+        <app-form-control labelText="número" inputId="numero" inputType="text" inputName="numero"
+            placeholder="Número" [control]="capturarForm.get('numero')"></app-form-control>
+
+        <app-form-control labelText="colonia" inputId="colonia" inputType="text" inputName="colonia"
+            placeholder="Colónia" [control]="capturarForm.get('colonia')"></app-form-control>
+
+        <app-form-control labelText="codigo postal" inputId="cp" inputType="text" inputName="cp"
+            placeholder="Codigo Postal" [control]="capturarForm.get('codigo_postal')"></app-form-control>
+
+    </div>
+
+    <div class="contacto">
+        <app-form-control labelText="telefono" inputId="telefono" inputType="text" inputName="telefono"
+            placeholder="Teléfono" [control]="capturarForm.get('telefono')"></app-form-control>
+
+        <app-form-control labelText="RFC" inputId="rfc" inputType="text" inputName="rfc" placeholder="RFC"
+            [control]="capturarForm.get('rfc')"></app-form-control>
+    </div>
+
+    <h3 class="form-seccion-title documentos" >Documentos 
+        <button *ngIf="!viewOnly" class="primary agregar-mas" (click)="agregarFilesControl()">Agregar Documento</button></h3>
+    <!-- <input type="file" class="agregar-mas" (change)="selectFile($event)"> -->
+
+    <div class="file-list" formArrayName="files">
+        <div class="file-list-header" *ngIf="filesControls.length > 0">
+            <h4 class="file-name">Nombre del Documento</h4>
+            <h4 class="file">Archivo</h4>
+            <h4 class="options">Opciones</h4>
+        </div>
+        <div *ngFor="let formGroup of filesControls.controls; let i = index">
+            <div [formGroupName]="i" class="file-item">
+                <input type="text" class="file-name" placeholder="Nombre del Documento" formControlName="nombre">
+                <input type="file" class="file" placeholder="Nombre del archivo" formControlName="file">
+                <div class="options">
+                    <button class="danger" (click)="eliminarControl(i)">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

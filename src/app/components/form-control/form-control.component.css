@@ -1,0 +1,73 @@
+.control {
+    position: relative;
+    margin: 0.8rem 0;
+}
+
+.control-label {
+    position: absolute;
+    top: .4rem;
+    font-size: 1.4rem;
+    color: var(--gray);
+    font-weight: 700;
+    transition: top .2s ease, color .2s ease, font-size .2s ease;
+    text-transform: capitalize;
+    cursor: text;
+}
+
+.control-label.focus {
+    top: -0.9rem;
+    font-size: 1rem;
+    color: var(--blue);
+}
+
+.control-label.pristine {
+    color: var(--gray);
+}
+
+.control-label.valid {
+    color: var(--green);
+}
+
+.control-label.invalid {
+    color: var(--red);
+}
+
+.control-input {
+    width: 100%;
+    padding: 1rem 1rem 0.4rem 1rem;
+    border: none;
+    border-bottom: 2px solid var(--ligth);
+    margin-bottom: 1.2rem;
+    transition: border-color .5s ease;
+}
+
+.control-input:disabled {
+    background-color: transparent;
+}
+
+.control-input:focus {
+    outline: none;
+    border-color: var(--blue);
+}
+
+/* ------------------------------------------------------------------------------------------ // angular class // */ 
+ 
+
+input.ng-dirty.ng-valid {
+    border-color: var(--green);
+}
+
+input.ng-dirty.ng-invalid {
+    border-color: vaR(--red);
+}
+
+/* ------------------------------------------------------------------------------------------ // span // */ 
+
+.error-msg {
+    position: absolute;
+    font-size: .8rem;
+    bottom: 2px;
+    left: 1rem;
+    color: red;
+}
+ 

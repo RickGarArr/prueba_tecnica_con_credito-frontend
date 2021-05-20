@@ -1,0 +1,10 @@
+.contenido {
+    max-width: 100%;
+}
+
+@media only screen and (min-width:641px) {
+    .contenido {
+        max-width: 640px;
+        margin: 0 auto;
+    }
+}
