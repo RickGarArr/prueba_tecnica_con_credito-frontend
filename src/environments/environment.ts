@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  socket_url: 'localhost',
-  socket_port: 5000
+  base_url: 'http://localhost:5000/concredito'
 };
 
 /*

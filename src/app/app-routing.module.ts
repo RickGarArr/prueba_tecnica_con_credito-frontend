@@ -26,7 +26,7 @@ const routes: Routes = [
     component: ListaProspectosPage
   },
   {
-    path: 'prospectos/:id',
+    path: 'prospectos/:method/:id',
     component: DetallesProspectoPage
   },
   {

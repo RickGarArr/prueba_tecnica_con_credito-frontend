@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'home-page',
@@ -6,13 +7,19 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./home.page.css']
 })
 export class HomePage implements OnInit {
-    
-    constructor() {
+
+    constructor(private router: Router) {
 
     }
 
     ngOnInit(): void {
-        
+
+    }
+
+    verEvaluados() {
+        this.router.navigate(['/prospectos', ], {queryParams: {
+            evaluados: true
+        }});
     }
 
 }

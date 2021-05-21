@@ -1,8 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { fromEvent } from 'rxjs';
-import { tap } from 'rxjs/operators';
-import { AlertsService } from 'src/app/services/alerts.service';
 import { UIService } from 'src/app/services/ui.service';
 
 @Component({
@@ -24,6 +22,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
       if (event instanceof NavigationEnd) {
         switch (event.url) {
           case '/home':
+          case '/':
             this.capturar_buttons.nativeElement.style.display = 'none';
             break;
           case '/capturar':

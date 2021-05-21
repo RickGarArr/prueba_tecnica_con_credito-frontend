@@ -1,7 +1,8 @@
 <div class="prospectos-list-item" #list_item>
-    <p class="nombre">Ricardo</p>
-    <p class="apellido_pat">Garcia</p>
-    <p class="apellido_mat">Arreola</p>
-    <p class="status">Enviado</p>
-    <button class="primary" (click)="verDetalles()">Ver Detalles</button>
+    <p class="nombre">{{prospecto.nombre}}</p>
+    <p class="apellido_pat"> {{ prospecto.apellido_pat }} </p>
+    <p class="apellido_mat">{{ prospecto.apellido_mat }}</p>
+    <p class="status">{{ prospecto.estatus }}</p>
+    <button class="primary" *ngIf="isAutorizado || isRechazado" (click)="verDetalles()">Ver Detalles</button>
+    <button class="success" *ngIf="isEnviado" (click)="evaluar()">Evaluar</button>
 </div>

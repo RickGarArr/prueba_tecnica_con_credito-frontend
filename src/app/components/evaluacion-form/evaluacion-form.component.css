@@ -1,0 +1,25 @@
+form {
+    background-color: var(--ligth);
+    border-radius: 5px;
+    padding: 1.6rem;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.select > *{
+    display: inline-block;
+}
+.select > *:first-child {
+    margin-right: 8px;
+}
+
+textarea {
+    padding: 8px;
+    margin-top: 8px;
+    width: 100%;
+    border-width: 2px;
+    border-radius: 5px;
+}

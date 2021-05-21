@@ -1,8 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { IProspecto } from 'src/app/interfaces/globales';
 import { AlertsService } from 'src/app/services/alerts.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { UIService } from 'src/app/services/ui.service';
 
 const { minLength, required, pattern, maxLength } = Validators;
@@ -14,20 +17,49 @@ const { minLength, required, pattern, maxLength } = Validators;
 })
 export class DetallesProspectoPage implements OnInit, OnDestroy {
 
-    private cancelButonSub: Subscription;
+    public prospecto: IProspecto = undefined;
+    public evaluacionValue = undefined;
+    public method: string;
+    public id: string;
 
-    constructor(private router: Router, private uiService: UIService) {
+    private cancelButonSubs: Subscription;
+    private getProspectoSubs: Subscription;
 
+    constructor(private router: Router,
+        private uiService: UIService,
+        private activatedRoute: ActivatedRoute,
+        private backendService: BackendService,
+        public alertService: AlertsService
+    ) {
+        this.activatedRoute.params.subscribe(({ id, method }: { id: string, method: string }) => {
+            this.method = method;
+            this.id = id;
+        });
     }
 
+
     ngOnInit(): void {
-        this.cancelButonSub = this.uiService.CancelButtonObservable.subscribe(() => {
+        this.alertService.showLoadingAlert('Buscando informacion del prospecto...');
+        this.getProspectoSubs = this.backendService.getProspecto(this.id).subscribe(({prospecto} : {prospecto: IProspecto}) => {
+            const { id, estatus, observaciones, ...prospectoDB } = prospecto;
+            this.prospecto = prospectoDB;
+            this.evaluacionValue = {estatus, observaciones, id};
+            this.alertService.closeAlert();
+        }, ({ error }: HttpErrorResponse) => {
+            this.alertService.closeAlert();
+            this.alertService.showErrorAlert(error.errors[0]).then(() => {
+                this.router.navigate(['/prospectos']);
+            });
+        });
+
+        this.cancelButonSubs = this.uiService.CancelButtonObservable.subscribe(() => {
             this.router.navigate(['/prospectos']);
         });
     }
 
     ngOnDestroy(): void {
-        this.cancelButonSub.unsubscribe();
+        this.cancelButonSubs.unsubscribe();
+        this.getProspectoSubs.unsubscribe();
     }
 
 }

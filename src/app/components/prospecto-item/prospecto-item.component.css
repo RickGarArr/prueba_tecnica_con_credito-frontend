@@ -5,7 +5,12 @@
     margin: 8px 0;
     background-color: white;
     border-radius: 5px;
-    padding: 4px 4px;
+    padding: 8px 8px;
+}
+
+.prospectos-list-item .nombre {
+    font-weight: 700;
+    text-transform: capitalize;
 }
 
 .prospectos-list-item > * {
@@ -21,5 +26,5 @@
 }
 
 .prospectos-list-item.enviado {
-    background-color: #a9d6ff;
+    background-color: #d0e8ff;
 }

@@ -77,6 +77,9 @@ export class AlertsService {
     }
 
     public closeAlert() {
-        if (Sweet.isVisible()) Sweet.close();
+        return new Promise<void>(resolve => {
+            if (Sweet.isVisible()) Sweet.close();
+            resolve();
+        });
     }
 }

@@ -6,13 +6,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProspectoItemComponent } from './prospecto-item/prospecto-item.component';
 import { RouterModule } from '@angular/router';
 import { FormularioProspectoComponent } from './formulario-prospecto/formulario-prospecto.component';
+import { EvaluacionFormComponent } from './evaluacion-form/evaluacion-form.component';
 
 @NgModule({
   declarations: [
     ToolbarComponent,
     FormControlComponent,
     ProspectoItemComponent,
-    FormularioProspectoComponent
+    FormularioProspectoComponent,
+    EvaluacionFormComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { FormularioProspectoComponent } from './formulario-prospecto/formulario-
     ToolbarComponent,
     FormControlComponent,
     ProspectoItemComponent,
-    FormularioProspectoComponent
+    FormularioProspectoComponent,
+    EvaluacionFormComponent
   ]
 })
 export class ComponentsModule { }

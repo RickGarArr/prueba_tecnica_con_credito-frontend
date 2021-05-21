@@ -3,6 +3,7 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AlertsService } from 'src/app/services/alerts.service';
+import { BackendService } from 'src/app/services/backend.service';
 import { UIService } from 'src/app/services/ui.service';
 
 const { minLength, required, pattern, maxLength } = Validators;
@@ -16,7 +17,7 @@ export class CrearProspectoPage implements OnInit, OnDestroy {
 
     private cancelClickSubs: Subscription;
 
-    constructor(private uiService: UIService, private alertService: AlertsService, private router: Router) {
+    constructor(private uiService: UIService, private alertService: AlertsService, private router: Router, private backendService: BackendService) {
     }
 
     ngOnInit(): void {
@@ -34,7 +35,14 @@ export class CrearProspectoPage implements OnInit, OnDestroy {
     }
     
     submitForm(event) {
-        console.log(event);
-        
+        this.alertService.showLoadingAlert('Guardando información en el servidor');
+        this.backendService.postProspecto(event).subscribe(({msg}: {msg: string}) => {
+            this.alertService.closeAlert();
+            this.alertService.showMessageAlert(msg);
+            this.router.navigate(['/prospectos']);
+        }, () => {
+            this.alertService.closeAlert();
+            this.alertService.showErrorAlert('Error al crear prospecto');
+        });
     }
 }

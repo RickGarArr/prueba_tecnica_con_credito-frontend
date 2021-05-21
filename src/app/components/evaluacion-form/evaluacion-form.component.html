@@ -1,0 +1,14 @@
+<form [formGroup]="evaluacionForm">
+    <div class="topbar">
+        <h3 class="form-seccion-title">Evaluación</h3>
+        <div class="select">
+            <p>Seleccione un estado</p>
+            <select>
+                <option value="enviado" selected disabled>Enviado</option>
+                <option value="autorizado">Autorizado</option>
+                <option value="rechazado">Rechazado</option>
+            </select>
+        </div>
+    </div>
+    <textarea rows="5" formControlName="observaciones">Ingrese las Observaciones</textarea>
+</form>

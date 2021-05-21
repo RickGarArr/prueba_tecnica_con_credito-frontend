@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { UIService } from 'src/app/services/ui.service';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { IProspecto } from 'src/app/interfaces/globales';
 
 const { required, minLength, maxLength } = Validators;
 
@@ -14,7 +15,8 @@ const { required, minLength, maxLength } = Validators;
 })
 export class FormularioProspectoComponent implements OnInit, OnDestroy {
 
-    @Input() viewOnly: boolean = false;
+    @Input() method: string = "";
+    @Input() prospecto: IProspecto;
     @Output() onSubmitForm: EventEmitter<any> = new EventEmitter();
 
     private guardarButtonSub: Subscription;
@@ -38,8 +40,6 @@ export class FormularioProspectoComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.guardarButtonSub = this.uiService.SaveButtonObservable.subscribe(() => {
-            console.log(this.capturarForm.value);
-            
             if (this.capturarForm.invalid) {
                 this.alertService.showErrorAlert('La información no está completa');
                 this.markAsDirty(this.capturarForm.controls);
@@ -51,20 +51,10 @@ export class FormularioProspectoComponent implements OnInit, OnDestroy {
                 });
             }
         });
-        if (this.viewOnly) {
+
+        if(this.prospecto) {
             this.capturarForm.disable();
-            this.capturarForm.setValue({
-                apellido_mat: "Arreola",
-                apellido_pat: "Garcia",
-                calle: "Vicente Guerrero",
-                codigo_postal: "34900",
-                colonia: "Zona Centro",
-                files: [],
-                nombre: "Ricardo",
-                numero: "16",
-                rfc: "GAAR970207LG0",
-                telefono: "6778790329"
-            });
+            this.capturarForm.setValue(this.prospecto);
         }
     }
 
@@ -82,6 +72,10 @@ export class FormularioProspectoComponent implements OnInit, OnDestroy {
 
     eliminarControl(i) {
         this.filesControls.removeAt(i);
+    }
+
+    setFile(i, {target: {files: [file]}}) {
+        (this.filesControls.controls[i] as FormGroup).controls['file'].setValue(file);
     }
 
     agregarFilesControl() {

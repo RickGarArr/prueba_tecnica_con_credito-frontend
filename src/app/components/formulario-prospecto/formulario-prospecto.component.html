@@ -41,8 +41,7 @@
     </div>
 
     <h3 class="form-seccion-title documentos" >Documentos 
-        <button *ngIf="!viewOnly" class="primary agregar-mas" (click)="agregarFilesControl()">Agregar Documento</button></h3>
-    <!-- <input type="file" class="agregar-mas" (change)="selectFile($event)"> -->
+        <button *ngIf="method==='capturar'" class="primary agregar-mas" (click)="agregarFilesControl()">Agregar Documento</button></h3>
 
     <div class="file-list" formArrayName="files">
         <div class="file-list-header" *ngIf="filesControls.length > 0">
@@ -53,7 +52,7 @@
         <div *ngFor="let formGroup of filesControls.controls; let i = index">
             <div [formGroupName]="i" class="file-item">
                 <input type="text" class="file-name" placeholder="Nombre del Documento" formControlName="nombre">
-                <input type="file" class="file" placeholder="Nombre del archivo" formControlName="file">
+                <input type="file" class="file" placeholder="Nombre del archivo" (change)="setFile(i, $event)">
                 <div class="options">
                     <button class="danger" (click)="eliminarControl(i)">Eliminar</button>
                 </div>
