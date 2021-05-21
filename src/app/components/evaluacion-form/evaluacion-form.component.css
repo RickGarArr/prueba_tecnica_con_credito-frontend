@@ -9,6 +9,17 @@ form {
     justify-content: space-between;
 }
 
+select {
+    background-color: var(--blue);
+    color: white;
+}
+
+select > option {
+    background-color: white;
+    padding: 4px;
+    color: black;
+}
+
 .select > *{
     display: inline-block;
 }

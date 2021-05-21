@@ -1,12 +1,13 @@
 #topbar {
     color: white;
     background-color: var(--blue-hover);
-    padding: 1.6rem;
+    padding: 1rem;
 }
 
 .contenido-toolbar {
     text-align: center;
-    position: relative;
+    display: flex;
+    justify-content: space-between;
 }
 
 .right {
@@ -14,11 +15,26 @@
     top: 50%;
     transform: translateY(-50%);
     right: 0;
+    display: flex;
 }
 
-.capturar-buttons {
-    display: none;
+.search-div {
+    margin-right: 2rem;
 }
+
+.search-div select {
+    margin-left: 1rem;
+}
+
+.search-div select > option {
+    text-transform: capitalize;
+    padding: .5rem 0;
+}
+
+.search-div input {
+    margin-right: 8px;
+}
+
 
 .capturar-buttons > * {
     margin-left: 8px;

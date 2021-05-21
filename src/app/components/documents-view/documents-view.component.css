@@ -1,0 +1,34 @@
+.files-container {
+    background-color: var(--ligth);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 1.6rem;
+    border-radius: 5px;
+}
+
+.file-item,
+.file-item-header {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.file-item {
+    margin-bottom: 1rem;
+}
+
+.file-item-header {
+    font-weight: 700;
+    margin-top: .4rem;
+    margin-bottom: 1rem;
+}
+
+.file-item-header > *,
+.file-item > * {
+    flex-basis: calc(40% - 4px);
+}
+
+.file-item-header > *:last-child,
+.file-item > *:last-child {
+    flex-basis: calc(20% - 4px);
+}

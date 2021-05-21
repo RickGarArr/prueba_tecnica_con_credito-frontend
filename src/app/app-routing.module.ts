@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+//pages
 import { HomePage } from './pages/home/home.page';
 import { CrearProspectoPage } from './pages/crear_prospecto/crear_prospecto.page';
 import { ListaProspectosPage } from './pages/lista_prospectos/lista_prospectos.page';
-import { EvaluacionProspectoPage } from './pages/evaluacion_prospecto/evaluacion_prospecto.page';
 import { FourOFourPage } from './pages/FourOFour/FourOFour.page';
 import { DetallesProspectoPage } from './pages/detalles_prospecto/detalles_prospecto.page';
 
@@ -28,10 +29,6 @@ const routes: Routes = [
   {
     path: 'prospectos/:method/:id',
     component: DetallesProspectoPage
-  },
-  {
-    path: 'evaluacion',
-    component: EvaluacionProspectoPage
   },
   {
     path: '*',

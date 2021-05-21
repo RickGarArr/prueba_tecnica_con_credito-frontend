@@ -7,6 +7,7 @@ import { ProspectoItemComponent } from './prospecto-item/prospecto-item.componen
 import { RouterModule } from '@angular/router';
 import { FormularioProspectoComponent } from './formulario-prospecto/formulario-prospecto.component';
 import { EvaluacionFormComponent } from './evaluacion-form/evaluacion-form.component';
+import { DocumentsViewComponent } from './documents-view/documents-view.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { EvaluacionFormComponent } from './evaluacion-form/evaluacion-form.compo
     FormControlComponent,
     ProspectoItemComponent,
     FormularioProspectoComponent,
-    EvaluacionFormComponent
+    EvaluacionFormComponent,
+    DocumentsViewComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { EvaluacionFormComponent } from './evaluacion-form/evaluacion-form.compo
     FormControlComponent,
     ProspectoItemComponent,
     FormularioProspectoComponent,
-    EvaluacionFormComponent
+    EvaluacionFormComponent,
+    DocumentsViewComponent
   ]
 })
 export class ComponentsModule { }

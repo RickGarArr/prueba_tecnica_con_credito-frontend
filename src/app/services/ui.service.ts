@@ -7,4 +7,5 @@ import { Observable } from 'rxjs';
 export class UIService {
     public SaveButtonObservable: Observable<any>;
     public CancelButtonObservable: Observable<any>;
+    public BuscarButton: Observable<any>;
 }

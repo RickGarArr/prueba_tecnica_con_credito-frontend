@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IProspecto } from 'src/app/interfaces/globales';
+import { IFile, IProspecto } from 'src/app/interfaces/globales';
 import { AlertsService } from 'src/app/services/alerts.service';
 import { BackendService } from 'src/app/services/backend.service';
 import { UIService } from 'src/app/services/ui.service';
@@ -18,6 +18,7 @@ const { minLength, required, pattern, maxLength } = Validators;
 export class DetallesProspectoPage implements OnInit, OnDestroy {
 
     public prospecto: IProspecto = undefined;
+    public files: IFile[] = [];
     public evaluacionValue = undefined;
     public method: string;
     public id: string;
@@ -41,9 +42,10 @@ export class DetallesProspectoPage implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.alertService.showLoadingAlert('Buscando informacion del prospecto...');
         this.getProspectoSubs = this.backendService.getProspecto(this.id).subscribe(({prospecto} : {prospecto: IProspecto}) => {
-            const { id, estatus, observaciones, ...prospectoDB } = prospecto;
+            const { estatus, observaciones, files, ...prospectoDB } = prospecto;
             this.prospecto = prospectoDB;
-            this.evaluacionValue = {estatus, observaciones, id};
+            this.files = [...files];
+            this.evaluacionValue = {estatus, observaciones};
             this.alertService.closeAlert();
         }, ({ error }: HttpErrorResponse) => {
             this.alertService.closeAlert();

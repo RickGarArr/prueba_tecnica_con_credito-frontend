@@ -4,7 +4,12 @@
 
 @media only screen and (min-width:641px) {
     .contenido {
-        max-width: 640px;
+        max-width: 840px;
         margin: 0 auto;
     }
+}
+
+.prospectos-list {
+    max-height: 60vh;
+    overflow: auto;
 }

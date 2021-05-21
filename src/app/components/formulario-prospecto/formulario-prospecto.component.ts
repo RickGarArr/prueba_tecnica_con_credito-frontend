@@ -54,7 +54,7 @@ export class FormularioProspectoComponent implements OnInit, OnDestroy {
 
         if(this.prospecto) {
             this.capturarForm.disable();
-            this.capturarForm.setValue(this.prospecto);
+            this.capturarForm.reset(this.prospecto);
         }
     }
 

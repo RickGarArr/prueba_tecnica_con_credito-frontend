@@ -1,0 +1,12 @@
+<div class="files-container">
+    <div class="file-item-header">
+        <p>Nombre del Documento</p>
+        <p>Nombre del Archivo</p>
+        <p>Opciones</p>
+    </div>
+    <div class="file-item" *ngFor="let file of files">
+        <p class="field-name">{{file.nombre}}</p>
+        <p class="file-name">{{file.filename}}</p>
+        <button class="primary" (click)="verDocumento(file.filename)">ver</button>
+    </div>
+</div>

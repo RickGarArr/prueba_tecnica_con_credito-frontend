@@ -11,7 +11,11 @@ import { UIService } from 'src/app/services/ui.service';
 export class ToolbarComponent implements OnInit, AfterViewInit {
 
   public route: string;
+  @ViewChild('toolbar') toolbar: ElementRef;
   @ViewChild('capturar_buttons') capturar_buttons: ElementRef;
+  @ViewChild('search_div') search_div: ElementRef;
+  @ViewChild('select_estatus') select_estatus: ElementRef;
+  @ViewChild('buscador') buscador: ElementRef;
   @ViewChild('guardar') guardarButton: ElementRef;
   @ViewChild('cancelar') cancelarButton: ElementRef;
 
@@ -23,24 +27,27 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
         switch (event.url) {
           case '/home':
           case '/':
-            this.capturar_buttons.nativeElement.style.display = 'none';
-            break;
-          case '/capturar':
-            this.capturar_buttons.nativeElement.style.display = 'block';
-            this.cancelarButton.nativeElement.innerText = "cancelar";
-            this.guardarButton.nativeElement.style.display = "inline-block";
+            this.toolbar.nativeElement.style.display = "none";
             break;
           case '/prospectos':
-            this.capturar_buttons.nativeElement.style.display = 'block';
-            this.cancelarButton.nativeElement.innerText = "Volver";
-            this.guardarButton.nativeElement.style.display = 'none';
+            this.search_div.nativeElement.style.display = "flex";
+            this.toolbar.nativeElement.style.display = "flex";
+            this.guardarButton.nativeElement.style.display = "none";
+            this.cancelarButton.nativeElement.innerText = "volver";
+            break;
+          case '/capturar':
+            this.toolbar.nativeElement.style.display = "flex";
+            this.cancelarButton.nativeElement.innerText = "cancelar";
+            this.search_div.nativeElement.style.display = "none";
+            this.guardarButton.nativeElement.style.display = "inline-block";
             break;
           default:
-            this.capturar_buttons.nativeElement.style.display = 'block';
-            this.guardarButton.nativeElement.style.display = 'none';
-            this.cancelarButton.nativeElement.style.display = "inline-block";
-            this.cancelarButton.nativeElement.innerText = "Volver";
-            break;
+            if (event.url.includes('evaluar')) {
+              this.search_div.nativeElement.style.display = "none";
+              this.cancelarButton.nativeElement.innerText = "cancelar";
+              this.guardarButton.nativeElement.style.display = "inline-block";
+            }
+            this.toolbar.nativeElement.style.display = "flex";
         }
       }
     });
@@ -49,6 +56,11 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.uiService.SaveButtonObservable = fromEvent(this.guardarButton.nativeElement, 'click');
     this.uiService.CancelButtonObservable = fromEvent(this.cancelarButton.nativeElement, 'click');
+    this.uiService.BuscarButton = fromEvent(this.buscador.nativeElement, 'click');
+    fromEvent(this.select_estatus.nativeElement, 'change').subscribe(({ target }) => {
+      console.log(target.value);
+
+    });
   }
 
 }

@@ -23,25 +23,24 @@ export class BackendService {
         Object.entries(formProspecto).forEach(([key, value]) => {
             formdata.append(key, value);
         });
-        files.forEach((file: any) =>{
+        files.forEach((file: any) => {
             formdata.append(file.nombre, file.file, file.file.name);
         });
         return this.http.post(`${base_url}/prospecto`, formdata);
     }
 
-    public getProspectos(onlyEvaluados?: boolean) {
-        let observer = undefined;
-        if (onlyEvaluados) {
-            observer = this.http.get(`${base_url}/prospectos`, { params: { evaluados: "true" } });
-        } else {
-            observer = this.http.get(`${base_url}/prospectos`);
-        }
-        return observer.pipe(tap( ({prospectos}: {total: number, prospectos: IProspecto[]}) => {
+    public getProspectos(estatus = '', page = '', nombre = '') {
+        return this.http.get(`${base_url}/prospectos?page=${page}&estatus=${estatus}&nombre=${nombre}`)
+        .pipe(tap(({ prospectos }: { total: number, prospectos: IProspecto[] }) => {
             this.prospectos = [...prospectos];
         }));
     }
 
     public getProspecto(id: string) {
         return this.http.get(`${base_url}/prospecto/${id}`);
+    }
+
+    public evaluarProspecto(id: string, evaluacion: {estatus: string, observaciones: string}) {
+        return this.http.put(`${base_url}/prospecto/evaluar/${id}`, evaluacion);
     }
 }

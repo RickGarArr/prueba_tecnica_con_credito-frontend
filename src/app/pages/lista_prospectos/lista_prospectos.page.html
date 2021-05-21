@@ -3,10 +3,15 @@
         <div class="seccion">
             <h2>Prospectos</h2>
             <div class="contenido">
+                <div class="prospectos-list-header">
+                    <p>Nombre</p>
+                    <p>Primer Apellido</p>
+                    <p>Segundo Apellido</p>
+                    <p>estado</p>
+                    <p>opciones</p>
+                </div>
                 <div class="prospectos-list">
-                    <div *ngFor="let prospecto of this.prospectos">
-                        <app-prospecto-item [prospecto]="prospecto"></app-prospecto-item>
-                    </div>
+                    <app-prospecto-item *ngFor="let prospecto of this.prospectos" [prospecto]="prospecto"></app-prospecto-item>
                 </div>
             </div>
         </div>

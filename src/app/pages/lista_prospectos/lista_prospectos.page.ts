@@ -15,25 +15,19 @@ export class ListaProspectosPage implements OnInit, OnDestroy {
 
     public prospectos: IProspecto[] = [];
     private cancelClickSub: Subscription;
-    private onlyEvaluados: boolean = false;
 
     constructor(private router: Router,
         private uiService: UIService,
         private backendService: BackendService,
         private alertService: AlertsService,
-        private activatedRoute: ActivatedRoute
-    ) {
-        this.activatedRoute.queryParams.subscribe(querys => {
-            this.onlyEvaluados = querys.evaluados;
-        });
-    }
+    ) { }
 
     ngOnInit(): void {
         this.alertService.showLoadingAlert('Buscando información de los prospectos');
         this.cancelClickSub = this.uiService.CancelButtonObservable.subscribe(() => {
             this.router.navigate(['/home']);
         });
-        this.backendService.getProspectos(this.onlyEvaluados).subscribe(({ total, prospectos }: { total: number, prospectos: IProspecto[] }) => {
+        this.backendService.getProspectos().subscribe(({total, prospectos}: {total: number, prospectos: IProspecto[]}) => {
             this.prospectos = [...prospectos];
             this.alertService.closeAlert();
         });

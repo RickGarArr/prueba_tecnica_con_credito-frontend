@@ -1,20 +1,8 @@
 .prospectos-list-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin: 8px 0;
     background-color: white;
     border-radius: 5px;
     padding: 8px 8px;
-}
-
-.prospectos-list-item .nombre {
-    font-weight: 700;
-    text-transform: capitalize;
-}
-
-.prospectos-list-item > * {
-    text-align: center;
 }
 
 .prospectos-list-item.autorizado {

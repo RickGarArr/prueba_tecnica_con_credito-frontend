@@ -4,6 +4,7 @@
             <h2>Detalles Prospecto</h2>
             <div *ngIf="prospecto != undefined">
                 <app-formulario-prospecto [method]="method" [prospecto]="prospecto"></app-formulario-prospecto>
+                <app-documents-view [files]="files"></app-documents-view>
                 <app-evaluacion-form [evaluacionValue]="evaluacionValue"></app-evaluacion-form>
             </div>
         </div>
