@@ -43,4 +43,8 @@ export class BackendService {
     public evaluarProspecto(id: string, evaluacion: {estatus: string, observaciones: string}) {
         return this.http.put(`${base_url}/prospecto/evaluar/${id}`, evaluacion);
     }
+
+    public getProspectoFile(id: string, filename: string) {
+        return fetch(`${base_url}/file/${id}/${filename}`);
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-documents-view',
@@ -8,10 +8,15 @@ import { Component, Input, OnInit } from '@angular/core';
 export class DocumentsViewComponent implements OnInit {
 
   @Input() files: any = [];
+  @Output() onFileView: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  verDocumento(filename) {
+    this.onFileView.emit(filename);
   }
 
 }

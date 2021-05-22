@@ -41,11 +41,11 @@ export class DetallesProspectoPage implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.alertService.showLoadingAlert('Buscando informacion del prospecto...');
-        this.getProspectoSubs = this.backendService.getProspecto(this.id).subscribe(({prospecto} : {prospecto: IProspecto}) => {
+        this.getProspectoSubs = this.backendService.getProspecto(this.id).subscribe(({ prospecto }: { prospecto: IProspecto }) => {
             const { estatus, observaciones, files, ...prospectoDB } = prospecto;
             this.prospecto = prospectoDB;
             this.files = [...files];
-            this.evaluacionValue = {estatus, observaciones};
+            this.evaluacionValue = { estatus, observaciones };
             this.alertService.closeAlert();
         }, ({ error }: HttpErrorResponse) => {
             this.alertService.closeAlert();
@@ -57,6 +57,23 @@ export class DetallesProspectoPage implements OnInit, OnDestroy {
         this.cancelButonSubs = this.uiService.CancelButtonObservable.subscribe(() => {
             this.router.navigate(['/prospectos']);
         });
+    }
+
+    fetchFile(filename) {
+        this.backendService.getProspectoFile(this.prospecto.id, filename).then((response) => {
+            console.log(response.url);
+            return response.blob();
+        }).then((file) => {
+            let objectURL = URL.createObjectURL(file);
+            (document.querySelector('#pdf-frame') as HTMLMediaElement).src = '';
+            (document.querySelector('#pdf-frame') as HTMLMediaElement).src = objectURL;
+            // objectURL = URL.revokeObjectURL(file);
+        }).then(
+            function () {
+                window.setTimeout(function () {
+                    (document.querySelector('#pdf-frame') as any).contentWindow.print();
+                }, 1000)
+            });
     }
 
     ngOnDestroy(): void {
