@@ -9,7 +9,7 @@ export interface IProspecto {
     codigo_postal?: string;
     telefono?: string;
     rfc?: string;
-    estatus?: "Enviado" | "Autorizado" | "Rechazado";
+    estatus?: string;
     observaciones?: string;
     created_at?: Date;
     files?: Array<IFile>;

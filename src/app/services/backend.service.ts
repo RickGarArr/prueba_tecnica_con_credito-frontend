@@ -21,10 +21,10 @@ export class BackendService {
         const { files, ...formProspecto } = prospecto;
         const formdata = new FormData();
         Object.entries(formProspecto).forEach(([key, value]) => {
-            formdata.append(key, value);
+            formdata.append(key, value.trim().toLowerCase());
         });
         files.forEach((file: any) => {
-            formdata.append(file.nombre, file.file, file.file.name);
+            formdata.append(file.nombre.trim().toLowerCase(), file.file, file.file.name.trim().toLowerCase());
         });
         return this.http.post(`${base_url}/prospecto`, formdata);
     }

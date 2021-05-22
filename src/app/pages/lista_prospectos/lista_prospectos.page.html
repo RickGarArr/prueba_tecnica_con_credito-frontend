@@ -10,7 +10,7 @@
                     <p>estado</p>
                     <p>opciones</p>
                 </div>
-                <div class="prospectos-list">
+                <div class="prospectos-list" *ngIf="prospectos.length > 0">
                     <app-prospecto-item *ngFor="let prospecto of this.prospectos" [prospecto]="prospecto"></app-prospecto-item>
                 </div>
             </div>

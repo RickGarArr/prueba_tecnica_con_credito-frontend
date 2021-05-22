@@ -26,6 +26,7 @@ export class DetallesProspectoPage implements OnInit, OnDestroy {
 
     private cancelButonSubs: Subscription;
     private getProspectoSubs: Subscription;
+    private toolbarSelectSubs: Subscription;
 
     constructor(private router: Router,
         private uiService: UIService,
@@ -67,18 +68,29 @@ export class DetallesProspectoPage implements OnInit, OnDestroy {
     }
 
     closeFrame() {
-        this.file = undefined;        
+        this.file = undefined;
     }
 
-    saveObservaciones(value) {
+    async saveObservaciones(value) {
         if (!value) {
             this.alertService.showErrorAlert('La información aún no está completa');
         } else {
-            this.backendService.evaluarProspecto(this.prospecto.id, value).subscribe(result => {
-                console.log(result);
-            }, err => {
-                console.log(err);
-            })
+            const result = await this.alertService.showConfirmAlert('no se podran realizar cambios', '¿Está seguró?');
+            if (result.isConfirmed) {
+                this.alertService.showLoadingAlert('Guardando información en el servidor');
+                this.backendService.evaluarProspecto(this.prospecto.id, value).subscribe(({msg}: {msg: string}) => {
+                    this.alertService.closeAlert();
+                    setTimeout(() => {
+                        this.alertService.showSuccessAlert(msg);
+                        this.router.navigate(['/prospectos']);
+                    }, 200);
+                }, ({ error: {errors} }: HttpErrorResponse) => {
+                    this.alertService.closeAlert();
+                    setTimeout(() => {
+                        this.alertService.showSuccessAlert(errors[0]);
+                    }, 200);
+                });
+            }
         }
     }
 

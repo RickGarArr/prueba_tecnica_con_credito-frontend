@@ -6,7 +6,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Subscription } from 'rxjs';
 import { IProspecto } from 'src/app/interfaces/globales';
 
-const { required, minLength, maxLength } = Validators;
+const { required, minLength, maxLength, pattern } = Validators;
 
 @Component({
     selector: 'app-formulario-prospecto',
@@ -25,15 +25,15 @@ export class FormularioProspectoComponent implements OnInit, OnDestroy {
 
     constructor(private fb: FormBuilder, private uiService: UIService, private alertService: AlertsService) {
         this.capturarForm = this.fb.group({
-            nombre: new FormControl('', [required, minLength(2)]),
-            apellido_pat: new FormControl('', [required, minLength(2)]),
-            apellido_mat: new FormControl(''),
-            calle: new FormControl('', [required, minLength(2)]),
-            numero: new FormControl('', [required, minLength(1), maxLength(5)]),
-            colonia: new FormControl('', [required, minLength(2)]),
+            nombre: new FormControl('', [required, minLength(2), pattern("([a-zA-Z]+ ?)+?")]),
+            apellido_pat: new FormControl('', [required, minLength(2), pattern("([a-zA-Z]+ ?)+?")]),
+            apellido_mat: new FormControl('', pattern("([a-zA-Z]+ ?)+?")),
+            calle: new FormControl('', [required, minLength(2), pattern("([a-zA-Z0-9.-]+ ?)+?")]),
+            numero: new FormControl('', [required, minLength(1), maxLength(5), pattern("^[0-9]*$")]),
+            colonia: new FormControl('', [required, minLength(5), maxLength(64), pattern("([a-zA-Z]+ ?)+?")]),
             codigo_postal: new FormControl('', [required, minLength(4), maxLength(5)]),
-            telefono: new FormControl('', [required, minLength(10), maxLength(12)]),
-            rfc: new FormControl('', [required, minLength(12), maxLength(14)]),
+            telefono: new FormControl('', [required, minLength(10), maxLength(10), pattern("^[0-9]*$")]),
+            rfc: new FormControl('', [required, minLength(12), maxLength(14), pattern("([a-zA-Z]{4})+([0-9]{6})+([a-zA-Z]{2})+([0-9]{1})")]),
             files: new FormArray([])
         }, { updateOn: 'blur' });
     }
@@ -54,14 +54,11 @@ export class FormularioProspectoComponent implements OnInit, OnDestroy {
             });
         }
 
-        if(this.prospecto) {
-            this.capturarForm.disable();
-            this.capturarForm.reset(this.prospecto);
-        }
+        if (this.prospecto) this.resetForm();
     }
 
     ngOnDestroy() {
-        this.guardarButtonSub.unsubscribe();
+        this.guardarButtonSub?.unsubscribe();
     }
 
     public get filesControls() {
@@ -76,7 +73,7 @@ export class FormularioProspectoComponent implements OnInit, OnDestroy {
         this.filesControls.removeAt(i);
     }
 
-    setFile(i, {target: {files: [file]}}) {
+    setFile(i, { target: { files: [file] } }) {
         (this.filesControls.controls[i] as FormGroup).controls['file'].setValue(file);
     }
 
@@ -87,6 +84,11 @@ export class FormularioProspectoComponent implements OnInit, OnDestroy {
         });
         this.filesControls.push(fileControl);
         console.log(this.filesControls.controls);
+    }
+
+    formatInputValue({ keyCode, target: { value } }, i) {
+        const undescoresValue = value.replace(/ /g, "_");
+        (this.filesControls.controls[i] as FormGroup).controls['nombre'].setValue(undescoresValue);
     }
 
     private markAsDirty(controls: Object) {
@@ -103,4 +105,14 @@ export class FormularioProspectoComponent implements OnInit, OnDestroy {
         });
     }
 
+    resetForm() {
+        this.capturarForm.disable();
+        this.capturarForm.reset(this.prospecto);
+
+        Object.entries(this.capturarForm.controls).forEach(([, formControl]) => {
+            if (isNaN(formControl.value)) {
+                formControl.setValue(formControl.value.toUpperCase());
+            }
+        });
+    }
 }

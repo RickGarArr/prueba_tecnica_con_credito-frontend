@@ -18,6 +18,7 @@ export class FormControlComponent implements OnInit, AfterViewInit {
   @Input() inputId: string = 'sin_id';
   @Input() placeholder: string = '';
   @Input() control: FormControl;
+  @Input() errorMsg: string = "";
 
   constructor() { }
 
@@ -28,6 +29,10 @@ export class FormControlComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.input.nativeElement.addEventListener('focus', () => {
       this.label.nativeElement.classList.add('focus');
+    });
+
+    this.input.nativeElement.addEventListener('keyup', () => {
+      this.control.setValue(this.input.nativeElement.value.toUpperCase());
     });
 
     if(this.control.value) {

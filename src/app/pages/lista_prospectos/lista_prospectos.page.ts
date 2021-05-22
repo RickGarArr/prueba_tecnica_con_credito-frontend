@@ -15,6 +15,7 @@ export class ListaProspectosPage implements OnInit, OnDestroy {
 
     public prospectos: IProspecto[] = [];
     private cancelClickSub: Subscription;
+    private toolbarSelectSub: Subscription;
 
     constructor(private router: Router,
         private uiService: UIService,
@@ -30,6 +31,13 @@ export class ListaProspectosPage implements OnInit, OnDestroy {
         this.backendService.getProspectos().subscribe(({total, prospectos}: {total: number, prospectos: IProspecto[]}) => {
             this.prospectos = [...prospectos];
             this.alertService.closeAlert();
+        });
+        
+        this.toolbarSelectSub = this.uiService.toolbar_select.subscribe(({target: {value}}) => {
+            this.backendService.getProspectos(value.toLowerCase()).subscribe(({total, prospectos}: {total: number, prospectos: IProspecto[]}) => {
+                this.prospectos = [...prospectos];
+                this.alertService.closeAlert();
+            });
         });
     }
 

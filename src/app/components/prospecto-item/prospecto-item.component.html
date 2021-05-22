@@ -3,6 +3,6 @@
     <p class="apellido_pat"> {{ prospecto.apellido_pat }} </p>
     <p class="apellido_mat">{{ prospecto.apellido_mat }}</p>
     <p class="status">{{ prospecto.estatus }}</p>
-    <button class="primary" *ngIf="isAutorizado || isRechazado" (click)="verDetalles()">Ver Detalles</button>
-    <button class="success" *ngIf="isEnviado" (click)="evaluar()">Evaluar</button>
+    <button class="success" *ngIf="prospecto.estatus.toLowerCase() == 'enviado'" (click)="evaluar()">Evaluar</button>
+    <button class="primary" *ngIf="prospecto.estatus.toLowerCase() == 'autorizado' || prospecto.estatus == 'rechazado'" (click)="verDetalles()">Ver Detalles</button>
 </div>

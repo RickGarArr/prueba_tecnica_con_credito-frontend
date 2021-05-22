@@ -4,11 +4,11 @@
         <div class="select">
             <p>Seleccione un estado</p>
             <select formControlName="estatus">
-                <option value="enviado" selected>Enviado</option>
+                <option value="enviado"disabled>Enviado</option>
                 <option value="autorizado">Autorizado</option>
                 <option value="rechazado">Rechazado</option>
             </select>
         </div>
     </div>
-    <textarea rows="5" formControlName="observaciones">Ingrese las Observaciones</textarea>
+    <textarea *ngIf="evaluacionForm.controls['estatus'].value == 'rechazado'" rows="5" formControlName="observaciones">Ingrese las Observaciones</textarea>
 </form>

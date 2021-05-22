@@ -12,22 +12,11 @@ import { UIService } from 'src/app/services/ui.service';
 export class ProspectoItemComponent implements OnInit, AfterViewInit {
 
   @Input() prospecto: IProspecto = undefined;
-  public isEnviado: boolean = false;
-  public isAutorizado: boolean = false;
-  public isRechazado: boolean = false;
-
   @ViewChild('list_item') list_item: ElementRef;
 
   constructor(private router: Router) { }
 
-  ngOnInit(): void {
-    switch (this.prospecto.estatus.toLowerCase()) {
-      case 'autorizado': this.isEnviado = true; break;
-      case 'rechazado': this.isEnviado = true; break;
-      case 'enviado': this.isEnviado = true; break;
-      default: this.isEnviado = true;
-    }
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.list_item.nativeElement.classList.add(this.prospecto.estatus.toLowerCase());

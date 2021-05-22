@@ -1,5 +1,5 @@
 <div class="control">
     <label [for]="inputId" class="control-label" #label>{{ labelText }}</label>
     <input [type]="inputType" [name]="inputName" [id]="inputId" class="control-input" [formControl]="control" #input>
-    <span class="error-msg" *ngIf="control.invalid && control.dirty">el campo es requerido</span>
+    <span class="error-msg" *ngIf="control.invalid && control.dirty">{{errorMsg}}</span>
 </div>

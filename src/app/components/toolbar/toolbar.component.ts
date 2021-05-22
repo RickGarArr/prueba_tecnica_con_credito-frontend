@@ -15,7 +15,6 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   @ViewChild('capturar_buttons') capturar_buttons: ElementRef;
   @ViewChild('search_div') search_div: ElementRef;
   @ViewChild('select_estatus') select_estatus: ElementRef;
-  @ViewChild('buscador') buscador: ElementRef;
   @ViewChild('guardar') guardarButton: ElementRef;
   @ViewChild('cancelar') cancelarButton: ElementRef;
 
@@ -42,10 +41,14 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
             this.guardarButton.nativeElement.style.display = "inline-block";
             break;
           default:
-            if (event.url.includes('evaluar')) {
+            if (event.url.includes('evaluar') || event.url.includes('verdetalles')) {
               this.search_div.nativeElement.style.display = "none";
               this.cancelarButton.nativeElement.innerText = "cancelar";
               this.guardarButton.nativeElement.style.display = "inline-block";
+            }
+            if (event.url.includes('verdetalles')) {
+              this.guardarButton.nativeElement.style.display = "none";
+              this.cancelarButton.nativeElement.innerText = "volver";
             }
             this.toolbar.nativeElement.style.display = "flex";
         }
@@ -56,11 +59,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.uiService.SaveButtonObservable = fromEvent(this.guardarButton.nativeElement, 'click');
     this.uiService.CancelButtonObservable = fromEvent(this.cancelarButton.nativeElement, 'click');
-    this.uiService.BuscarButton = fromEvent(this.buscador.nativeElement, 'click');
-    fromEvent(this.select_estatus.nativeElement, 'change').subscribe(({ target }) => {
-      console.log(target.value);
-
-    });
+    this.uiService.toolbar_select = fromEvent(this.select_estatus.nativeElement, 'change');
   }
 
 }
