@@ -25,15 +25,15 @@ export class FormularioProspectoComponent implements OnInit, OnDestroy {
 
     constructor(private fb: FormBuilder, private uiService: UIService, private alertService: AlertsService) {
         this.capturarForm = this.fb.group({
-            nombre: new FormControl('', [required, minLength(2), pattern("([a-zA-Z]+ ?)+?")]),
-            apellido_pat: new FormControl('', [required, minLength(2), pattern("([a-zA-Z]+ ?)+?")]),
-            apellido_mat: new FormControl('', pattern("([a-zA-Z]+ ?)+?")),
-            calle: new FormControl('', [required, minLength(2), pattern("([a-zA-Z0-9.-]+ ?)+?")]),
+            nombre: new FormControl('', [required, minLength(2), pattern("([A-Za-zÁÉÍÓÚáéíóúñÑ]+ ?)+?")]),
+            apellido_pat: new FormControl('', [required, minLength(2), pattern("([A-Za-zÁÉÍÓÚáéíóúñÑ]+ ?)+?")]),
+            apellido_mat: new FormControl('', pattern("([A-Za-zÁÉÍÓÚáéíóúñÑ]+ ?)+?")),
+            calle: new FormControl('', [required, minLength(2), pattern("([A-Za-zÁÉÍÓÚáéíóúñÑ0-9.-]+ ?)+?")]),
             numero: new FormControl('', [required, minLength(1), maxLength(5), pattern("^[0-9]*$")]),
-            colonia: new FormControl('', [required, minLength(5), maxLength(64), pattern("([a-zA-Z]+ ?)+?")]),
-            codigo_postal: new FormControl('', [required, minLength(4), maxLength(5)]),
-            telefono: new FormControl('', [required, minLength(10), maxLength(10), pattern("^[0-9]*$")]),
-            rfc: new FormControl('', [required, minLength(12), maxLength(14), pattern("([a-zA-Z]{4})+([0-9]{6})+([a-zA-Z]{2})+([0-9]{1})")]),
+            colonia: new FormControl('', [required, minLength(5), maxLength(64), pattern("([A-Za-zÁÉÍÓÚáéíóúñÑ]+ ?)+?")]),
+            codigo_postal: new FormControl('', [required, minLength(4), maxLength(5), pattern("^[0-9]*$")]),
+            telefono: new FormControl('', [required, minLength(12), maxLength(12), pattern("^[0-9-]*$")]),
+            rfc: new FormControl('', [required, minLength(12), maxLength(14), pattern("([A-Za-zÁÉÍÓÚáéíóúñÑ]{4})+([0-9]{6})+([A-Za-zÁÉÍÓÚáéíóúñÑ]{2})+([0-9]{1})")]),
             files: new FormArray([])
         }, { updateOn: 'blur' });
     }
@@ -83,7 +83,6 @@ export class FormularioProspectoComponent implements OnInit, OnDestroy {
             file: new FormControl('')
         });
         this.filesControls.push(fileControl);
-        console.log(this.filesControls.controls);
     }
 
     formatInputValue({ keyCode, target: { value } }, i) {

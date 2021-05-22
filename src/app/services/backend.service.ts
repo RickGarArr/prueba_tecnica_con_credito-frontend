@@ -23,8 +23,9 @@ export class BackendService {
         Object.entries(formProspecto).forEach(([key, value]) => {
             formdata.append(key, value.trim().toLowerCase());
         });
-        files.forEach((file: any) => {
-            formdata.append(file.nombre.trim().toLowerCase(), file.file, file.file.name.trim().toLowerCase());
+        files?.forEach(({file, nombre}) => {
+            const undescoreName = file.name.trim().replace(/ /g, "_");
+            formdata.append(nombre.trim().toLowerCase(), file, undescoreName);
         });
         return this.http.post(`${base_url}/prospecto`, formdata);
     }

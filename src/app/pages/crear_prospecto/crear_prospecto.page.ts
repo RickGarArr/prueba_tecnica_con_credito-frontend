@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -40,9 +41,9 @@ export class CrearProspectoPage implements OnInit, OnDestroy {
             this.alertService.closeAlert();
             this.alertService.showMessageAlert(msg);
             this.router.navigate(['/prospectos']);
-        }, () => {
+        }, ({error}: HttpErrorResponse) => {
             this.alertService.closeAlert();
-            this.alertService.showErrorAlert('Error al crear prospecto');
+            this.alertService.showErrorAlert(error.errors[0]);
         });
     }
 }

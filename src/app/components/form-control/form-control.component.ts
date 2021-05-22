@@ -31,11 +31,20 @@ export class FormControlComponent implements OnInit, AfterViewInit {
       this.label.nativeElement.classList.add('focus');
     });
 
-    this.input.nativeElement.addEventListener('keyup', () => {
+    this.input.nativeElement.addEventListener('keyup', ({ target, keyCode }) => {
+      if (target.type === 'tel') {
+        if (target.value.length === 3 && keyCode !== 8) {
+          const inputValue = target.value + "-";
+          this.control.setValue(inputValue);
+        } else if (target.value.length === 7 && keyCode !== 8) {
+          const inputValue = target.value + "-";
+          this.control.setValue(inputValue);
+        }
+      }
       this.control.setValue(this.input.nativeElement.value.toUpperCase());
     });
 
-    if(this.control.value) {
+    if (this.control.value) {
       this.label.nativeElement.classList.add('focus');
       this.label.nativeElement.classList.add('pristine');
     }

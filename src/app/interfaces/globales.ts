@@ -17,5 +17,5 @@ export interface IProspecto {
 
 export interface IFile {
     nombre: String,
-    filename: String
+    file: File
 }
