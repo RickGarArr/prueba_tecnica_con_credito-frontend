@@ -22,6 +22,7 @@ export class DetallesProspectoPage implements OnInit, OnDestroy {
     public evaluacionValue = undefined;
     public method: string;
     public id: string;
+    public file: any = undefined;
 
     private cancelButonSubs: Subscription;
     private getProspectoSubs: Subscription;
@@ -59,21 +60,26 @@ export class DetallesProspectoPage implements OnInit, OnDestroy {
         });
     }
 
-    fetchFile(filename) {
-        this.backendService.getProspectoFile(this.prospecto.id, filename).then((response) => {
-            console.log(response.url);
-            return response.blob();
-        }).then((file) => {
-            let objectURL = URL.createObjectURL(file);
-            (document.querySelector('#pdf-frame') as HTMLMediaElement).src = '';
-            (document.querySelector('#pdf-frame') as HTMLMediaElement).src = objectURL;
-            // objectURL = URL.revokeObjectURL(file);
-        }).then(
-            function () {
-                window.setTimeout(function () {
-                    (document.querySelector('#pdf-frame') as any).contentWindow.print();
-                }, 1000)
-            });
+    async fetchFile(filename) {
+        const response = await this.backendService.getProspectoFile(this.prospecto.id, filename);
+        const blob = await response.blob();
+        this.file = blob;
+    }
+
+    closeFrame() {
+        this.file = undefined;        
+    }
+
+    saveObservaciones(value) {
+        if (!value) {
+            this.alertService.showErrorAlert('La información aún no está completa');
+        } else {
+            this.backendService.evaluarProspecto(this.prospecto.id, value).subscribe(result => {
+                console.log(result);
+            }, err => {
+                console.log(err);
+            })
+        }
     }
 
     ngOnDestroy(): void {

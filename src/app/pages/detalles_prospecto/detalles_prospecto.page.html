@@ -2,11 +2,11 @@
     <div class="contenedor">
         <div class="seccion">
             <h2>Detalles Prospecto</h2>
-            <iframe id="pdf-frame"></iframe>
+            <app-app-iframe *ngIf="file" [source]="file" (onCloseFrame)="closeFrame()"></app-app-iframe>
             <div *ngIf="prospecto != undefined">
                 <app-formulario-prospecto [method]="method" [prospecto]="prospecto"></app-formulario-prospecto>
                 <app-documents-view [files]="files" (onFileView)="fetchFile($event)"></app-documents-view>
-                <app-evaluacion-form [evaluacionValue]="evaluacionValue"></app-evaluacion-form>
+                <app-evaluacion-form [evaluacionValue]="evaluacionValue" (onSubmit)="saveObservaciones($event)"></app-evaluacion-form>
             </div>
         </div>
     </div>

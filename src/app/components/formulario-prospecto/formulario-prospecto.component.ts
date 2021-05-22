@@ -39,18 +39,20 @@ export class FormularioProspectoComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.guardarButtonSub = this.uiService.SaveButtonObservable.subscribe(() => {
-            if (this.capturarForm.invalid) {
-                this.alertService.showErrorAlert('La información no está completa');
-                this.markAsDirty(this.capturarForm.controls);
-            } else {
-                this.alertService.showConfirmAlert('¿la inforación es correcta?', '¿Está Seguro?').then(result => {
-                    if (result.isConfirmed) {
-                        this.onSubmitForm.emit(this.capturarForm.value);
-                    }
-                });
-            }
-        });
+        if (this.method === "capturar") {
+            this.guardarButtonSub = this.uiService.SaveButtonObservable.subscribe(() => {
+                if (this.capturarForm.invalid) {
+                    this.alertService.showErrorAlert('La información no está completa');
+                    this.markAsDirty(this.capturarForm.controls);
+                } else {
+                    this.alertService.showConfirmAlert('¿la inforación es correcta?', '¿Está Seguro?').then(result => {
+                        if (result.isConfirmed) {
+                            this.onSubmitForm.emit(this.capturarForm.value);
+                        }
+                    });
+                }
+            });
+        }
 
         if(this.prospecto) {
             this.capturarForm.disable();
