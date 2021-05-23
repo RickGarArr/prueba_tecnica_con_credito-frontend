@@ -6,8 +6,7 @@
     border-radius: 5px;
 }
 
-.file-item,
-.file-item-header {
+.file-item, .file-item-header {
     display: flex;
     justify-content: space-between;
     text-align: center;
@@ -23,12 +22,18 @@
     margin-bottom: 1rem;
 }
 
-.file-item-header > *,
-.file-item > * {
+.file-item-header>*, .file-item>* {
     flex-basis: calc(40% - 4px);
 }
 
-.file-item-header > *:last-child,
-.file-item > *:last-child {
+.file-item-header>*:last-child, .file-item>*:last-child {
     flex-basis: calc(20% - 4px);
+}
+
+.file-name, .file {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

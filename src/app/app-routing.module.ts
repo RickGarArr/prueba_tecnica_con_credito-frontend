@@ -31,7 +31,7 @@ const routes: Routes = [
     component: DetallesProspectoPage
   },
   {
-    path: '*',
+    path: '**',
     component: FourOFourPage
   }
 ];

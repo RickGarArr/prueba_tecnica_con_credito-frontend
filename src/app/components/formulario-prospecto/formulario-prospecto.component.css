@@ -38,6 +38,10 @@
 
 /* ------------------------------------------------------------------------------------------ // documentos // */
 
+.documentos-conteiner>* {
+    flex-basis: 100%;
+}
+
 .form-seccion-title.documentos {
     position: relative;
 }
@@ -50,87 +54,64 @@
     transform: translateY(-50%);
 }
 
-/* .agregar-mas {
-    width: 16rem;
-    transform: translateY(-50%);
-    color: transparent;
-    border: none;
-}
+/* ------------------------------------------------------------------------------------------ // file-list // */
 
-.agregar-mas:focus {
-    outline: none;
-}
+/* ------------------------------------------------------------------------------------------ // telefono // */
 
-.agregar-mas::-webkit-file-upload-button {
-    visibility: hidden;
-}
-
-.agregar-mas::before {
-    content: 'Seleccionar un archivo';
-    color: white;
-    position: absolute;
-    right: 0;
-    display: inline-block;
-    background-color: var(--blue);
-    border: none;
-    padding: .6rem 1rem;
-    outline: none;
-    white-space: nowrap;
-    -webkit-user-select: none;
-    user-select: none;
-    cursor: pointer;
-    font-weight: 700;
-}
-
-.agregar-mas:hover::before {
-    background-color: red;
-}
-
-.agregar-mas:hover::before {
-    border-color: black;
-}
-
-.agregar-mas:active::before {
-    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-} */
-
-/* ------------------------------------------------------------------------------------------ // file-list // */ 
-.file-list-header,
-.file-item {
+.file-list {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: .6rem 1rem;
 }
 
-.file-name {
-    flex: 0 0 calc(38% - 4px);
+.file-list-header>* {
+    margin: 1.6rem;
 }
 
-.file {
-    flex: 0 0 calc(38% - 4px);
+.file-item>* {
+    margin: 1rem;
 }
 
-.options {
-    flex: 0 0 calc(20% - 4px);
-}
-
-h4.file-name,
-h4.file,
-h4.options {
-    text-align: center;
+@media only screen and (min-width:641px) {
+    .file-list {
+        display: block;
+        justify-content: space-between;
+    }
+    .file-list-header, .file-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: .6rem 1rem;
+    }
+    .file-name {
+        flex: 0 0 calc(38% - 4px);
+    }
+    .file {
+        flex: 0 0 calc(38% - 4px);
+    }
+    .options {
+        flex: 0 0 calc(20% - 4px);
+    }
+    h4.file-name, h4.file, h4.options {
+        text-align: center;
+    }
+    .file-list-header>* {
+        margin: 0;
+    }
+    .file-item>* {
+        margin: 0;
+    }
 }
 
 .options .buttons {
     display: flex;
     justify-content: space-between;
-}
-
-.options .buttons > * {
-    flex: 0 0 calc(50% - 4px);
     width: 100%;
 }
 
+.options .buttons>* {
+    flex: 0 0 calc(50% - 4px);
+    width: 100%;
+}
 
 input.ng-invalid.ng-dirty {
     border-color: var(--red);

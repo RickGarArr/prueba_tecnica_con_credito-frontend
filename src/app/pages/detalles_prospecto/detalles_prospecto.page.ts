@@ -23,6 +23,7 @@ export class DetallesProspectoPage implements OnInit, OnDestroy {
     public method: string;
     public id: string;
     public file: any = undefined;
+    public filename: string;
 
     private cancelButonSubs: Subscription;
     private getProspectoSubs: Subscription;
@@ -62,9 +63,12 @@ export class DetallesProspectoPage implements OnInit, OnDestroy {
     }
 
     async fetchFile(filename) {
+        this.alertService.showLoadingAlert('buscando archivo en el servidor');
         const response = await this.backendService.getProspectoFile(this.prospecto.id, filename);
         const blob = await response.blob();
+        this.alertService.closeAlert();
         this.file = blob;
+        this.filename = filename;
     }
 
     closeFrame() {

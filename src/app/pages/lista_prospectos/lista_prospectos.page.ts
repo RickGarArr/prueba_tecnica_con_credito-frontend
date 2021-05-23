@@ -28,15 +28,19 @@ export class ListaProspectosPage implements OnInit, OnDestroy {
         this.cancelClickSub = this.uiService.CancelButtonObservable.subscribe(() => {
             this.router.navigate(['/home']);
         });
-        this.backendService.getProspectos().subscribe(({total, prospectos}: {total: number, prospectos: IProspecto[]}) => {
+
+        this.backendService.getProspectos().subscribe(({ total, prospectos }: { total: number, prospectos: IProspecto[] }) => {
             this.prospectos = [...prospectos];
             this.alertService.closeAlert();
         });
-        
-        this.toolbarSelectSub = this.uiService.toolbar_select.subscribe(({target: {value}}) => {
-            this.backendService.getProspectos(value.toLowerCase()).subscribe(({total, prospectos}: {total: number, prospectos: IProspecto[]}) => {
+
+        this.toolbarSelectSub = this.uiService.toolbar_select.subscribe(({ target: { value } }) => {
+            this.alertService.showLoadingAlert('buscando prospectos');
+            this.backendService.getProspectos(value.toLowerCase()).subscribe(({ total, prospectos }: { total: number, prospectos: IProspecto[] }) => {
                 this.prospectos = [...prospectos];
-                this.alertService.closeAlert();
+                setTimeout(() => {
+                    this.alertService.closeAlert();
+                }, 200);
             });
         });
     }

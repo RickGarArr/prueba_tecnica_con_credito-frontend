@@ -9,6 +9,7 @@ import { CrearProspectoPage } from './crear_prospecto/crear_prospecto.page';
 import { ListaProspectosPage } from './lista_prospectos/lista_prospectos.page';
 import { HomePage } from './home/home.page';
 import { DetallesProspectoPage } from './detalles_prospecto/detalles_prospecto.page';
+import { FourOFourPage } from './FourOFour/FourOFour.page';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import { DetallesProspectoPage } from './detalles_prospecto/detalles_prospecto.p
         CrearProspectoPage,
         HomePage,
         ListaProspectosPage,
-        DetallesProspectoPage
+        DetallesProspectoPage,
+        FourOFourPage
     ],
     exports: [
 

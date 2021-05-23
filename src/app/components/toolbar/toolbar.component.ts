@@ -41,16 +41,18 @@ export class ToolbarComponent implements OnInit, AfterViewInit {
             this.guardarButton.nativeElement.style.display = "inline-block";
             break;
           default:
-            if (event.url.includes('evaluar') || event.url.includes('verdetalles')) {
+            if (event.url.includes('evaluar')) {
               this.search_div.nativeElement.style.display = "none";
               this.cancelarButton.nativeElement.innerText = "cancelar";
               this.guardarButton.nativeElement.style.display = "inline-block";
-            }
-            if (event.url.includes('verdetalles')) {
+            } else if (event.url.includes('verdetalles')) {
+              this.search_div.nativeElement.style.display = "none";
               this.guardarButton.nativeElement.style.display = "none";
               this.cancelarButton.nativeElement.innerText = "volver";
+            } else {
+              this.toolbar.nativeElement.style.display = "none"
             }
-            this.toolbar.nativeElement.style.display = "flex";
+            // this.toolbar.nativeElement.style.display = "flex";
         }
       }
     });

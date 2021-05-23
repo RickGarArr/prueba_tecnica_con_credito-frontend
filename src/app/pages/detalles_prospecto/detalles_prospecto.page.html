@@ -2,7 +2,7 @@
     <div class="contenedor">
         <div class="seccion">
             <h2>Detalles Prospecto</h2>
-            <app-app-iframe *ngIf="file" [source]="file" (onCloseFrame)="closeFrame()"></app-app-iframe>
+            <app-app-iframe *ngIf="file" [source]="file" [filename]="filename" (onCloseFrame)="closeFrame()"></app-app-iframe>
             <div *ngIf="prospecto != undefined" class="contenido">
                 <app-formulario-prospecto [method]="method" [prospecto]="prospecto"></app-formulario-prospecto>
                 <app-documents-view [files]="files" (onFileView)="fetchFile($event)"></app-documents-view>
