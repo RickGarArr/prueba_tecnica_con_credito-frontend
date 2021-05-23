@@ -2,7 +2,7 @@
     <div class="topbar">
         <h3 class="form-seccion-title">Evaluación</h3>
         <div class="select">
-            <p>Seleccione un estado</p>
+            <p *ngIf="method != 'verdetalles'">Seleccione un estado</p>
             <select formControlName="estatus">
                 <option value="enviado"disabled>Enviado</option>
                 <option value="autorizado">Autorizado</option>

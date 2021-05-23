@@ -1,7 +1,8 @@
 <div id="crear-prospecto-page" class="fade-in">
     <div class="contenedor">
         <div class="seccion">
-            <h2>Detalles Prospecto</h2>
+            <h2 *ngIf="method == 'verdetalles'">Detalles Prospecto</h2>
+            <h2 *ngIf="method == 'evaluar'">Evaluar Prospecto</h2>
             <app-app-iframe *ngIf="file" [source]="file" [filename]="filename" (onCloseFrame)="closeFrame()"></app-app-iframe>
             <div *ngIf="prospecto != undefined" class="contenido">
                 <app-formulario-prospecto [method]="method" [prospecto]="prospecto"></app-formulario-prospecto>

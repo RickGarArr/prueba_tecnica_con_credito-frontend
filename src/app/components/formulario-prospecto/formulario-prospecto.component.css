@@ -61,14 +61,28 @@
 .file-list {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.file-list-header>* {
+.file-list-header {
+    display: none;
+}
+
+.file-list-header > *{
     margin: 1.6rem;
 }
 
-.file-item>* {
-    margin: 1rem;
+.file-item {
+    flex-basis: 100%;
+}
+
+.file-item > * {
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.file-item button {
+    width: 100%;
 }
 
 @media only screen and (min-width:641px) {
