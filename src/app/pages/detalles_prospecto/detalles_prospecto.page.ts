@@ -85,13 +85,16 @@ export class DetallesProspectoPage implements OnInit, OnDestroy {
                 this.backendService.evaluarProspecto(this.prospecto.id, value).subscribe(({msg}: {msg: string}) => {
                     this.alertService.closeAlert();
                     setTimeout(() => {
-                        this.alertService.showSuccessAlert(msg);
-                        this.router.navigate(['/prospectos']);
+                        this.alertService.showSuccessAlert(msg).then(() => {
+                            this.router.navigate(['/prospectos']);
+                        });
                     }, 200);
                 }, ({ error: {errors} }: HttpErrorResponse) => {
                     this.alertService.closeAlert();
                     setTimeout(() => {
-                        this.alertService.showSuccessAlert(errors[0]);
+                        this.alertService.showErrorAlert(errors[0]).then(() => {
+                            this.router.navigate(['/prospectos']);
+                        });
                     }, 200);
                 });
             }

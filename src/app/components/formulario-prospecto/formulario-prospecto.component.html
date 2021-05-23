@@ -6,7 +6,7 @@
 
         <app-form-control labelText="nombre" inputId="nombre" inputType="text" inputName="nombre"
             placeholder="Nombre del prospecto" [control]="capturarForm.get('nombre')"
-            errorMsg="El nombre es requerido y debe conteener un minimo de dos caracteres"></app-form-control>
+            errorMsg="El nombre es requerido y debe contener unicamente caracteres"></app-form-control>
 
         <app-form-control labelText="apellido paterno" inputId="apellido_paterno" inputType="text"
             inputName="apellido_paterno" placeholder="Apellido Paterno" [control]="capturarForm.get('apellido_pat')"
@@ -23,7 +23,7 @@
             [control]="capturarForm.get('calle')"
             errorMsg="la calle es requerida y debe conteener un minimo de dos caracteres"></app-form-control>
 
-        <app-form-control labelText="número" inputId="numero" inputType="text" inputName="numero" placeholder="Número"
+        <app-form-control labelText="número" inputId="numero" inputType="number" inputName="numero" placeholder="Número"
             [control]="capturarForm.get('numero')"
             errorMsg="El nombre es requerido, y debe contener unicamente numeros"></app-form-control>
 
@@ -31,7 +31,7 @@
             placeholder="Colónia" [control]="capturarForm.get('colonia')"
             errorMsg="la colonia es requerida y debe conteener un minimo de dos caracteres"></app-form-control>
 
-        <app-form-control labelText="codigo postal" inputId="cp" inputType="text" inputName="cp"
+        <app-form-control labelText="codigo postal" inputId="cp" inputType="number" inputName="cp"
             placeholder="Codigo Postal" [control]="capturarForm.get('codigo_postal')"
             errorMsg="el codigo postal es necesario y debe contener 5 numeros"></app-form-control>
 
@@ -48,7 +48,7 @@
     </div>
 
     <h3 class="form-seccion-title documentos">Documentos
-        <button *ngIf="method==='capturar'" class="primary agregar-mas" (click)="agregarFilesControl()">
+        <button *ngIf="method==='capturar'" class="primary agregar-mas" type="button" (click)="agregarFilesControl()">
             Agregar Documento
         </button>
     </h3>

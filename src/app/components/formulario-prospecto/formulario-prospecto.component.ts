@@ -107,7 +107,6 @@ export class FormularioProspectoComponent implements OnInit, OnDestroy {
     resetForm() {
         this.capturarForm.disable();
         this.capturarForm.reset(this.prospecto);
-
         Object.entries(this.capturarForm.controls).forEach(([, formControl]) => {
             if (isNaN(formControl.value)) {
                 formControl.setValue(formControl.value.toUpperCase());
